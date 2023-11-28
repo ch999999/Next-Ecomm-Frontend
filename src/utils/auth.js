@@ -73,7 +73,7 @@ export async function authenticateUser(email, password){
                 'Content-Type':'application/json'
             },
             body: JSON.stringify({
-                identity: email,
+                email,
                 password
             })
         }
@@ -89,12 +89,12 @@ export async function authenticateUser(email, password){
         isLoggedIn.set(true);
         return{
             success:true,
-            res: res
+            res
         }
     }
 
     return{
         success: false,
-        res: res
+        res
     }
 }

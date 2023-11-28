@@ -39,14 +39,12 @@
             if(res.success){
                 postSignup();
             }else{
-                alert("authentication failed")
+                
                 loading = false;
                 throw 'Sign up succeeded but authentication failed';
             }
         }else{
-            
             const res = await resp.json();
-            alert(JSON.stringify(res))
             loading = false;
             formErrors = await res.error;
         }
