@@ -47,8 +47,9 @@
         }else{
             alert("status=not 200")
             const res = await resp.json();
+            alert(JSON.stringify(res))
             loading = false;
-            formErrors = res.data;
+            formErrors = await res.error;
         }
     }
 
@@ -79,7 +80,7 @@
             />
             {#if 'name' in formErrors}
                 <label class="label" for="name">
-                    <span class="label-text-alt text-red-500">{formErrors['name'].message}</span>                    
+                    <span class="label-text-alt text-red-500">{formErrors['name']}</span>                    
                 </label>
             {/if}
         </div>
@@ -97,7 +98,7 @@
             />
             {#if 'email' in formErrors}
                 <label class="label" for="email">
-                    <span class="label-text-alt text-red-500">{formErrors['email'].message}</span>
+                    <span class="label-text-alt text-red-500">{formErrors['email']}</span>
                 </label>
             {/if}
         </div>
@@ -115,7 +116,7 @@
             />
             {#if 'password' in formErrors}
                 <label class="label" for="password">
-                    <span class="label-text-alt text-red-500">{formErrors['password'].message}</span>
+                    <span class="label-text-alt text-red-500">{formErrors['password']}</span>
                 </label>
             {/if}
         </div>
