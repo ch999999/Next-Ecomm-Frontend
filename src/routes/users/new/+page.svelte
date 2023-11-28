@@ -33,11 +33,10 @@
         });
 
         if(resp.status==200){
-            alert("status=200")
+
             const res = await authenticateUser(userData.email, userData.password)
 
             if(res.success){
-                alert("trying postsignup")
                 postSignup();
             }else{
                 alert("authentication failed")
@@ -45,7 +44,7 @@
                 throw 'Sign up succeeded but authentication failed';
             }
         }else{
-            alert("status=not 200")
+            
             const res = await resp.json();
             alert(JSON.stringify(res))
             loading = false;
