@@ -3,11 +3,13 @@
     import {goto} from "$app/navigation";
     import { isValidToken } from "../../../utils/auth";
     import Spinner from "../../../lib/Spinner.svelte";
+    import { alerts } from "../../../utils/alerts";
 
     let formErrors={};
     let loading = false;
     function postLogIn(){
         isValidToken();
+        alerts.clearAlert();
         goto('/');
         loading = false;
     }
@@ -23,20 +25,18 @@
         const resp = await authenticateUser(userData.email, userData.password);
 
         if(resp.success){
-            alert("success")
             postLogIn();
-        }else{
-            alert("failure")
-            const res = await resp.json();
             loading = false;
-            formErrors = res.error;
+        }else{
+            alerts.setAlert("Invalid email or password.", "alert-error");
+            loading = false;
         }
         loading = false;
     }
 </script>
 
 
-<svelte:head><title>NEXT jobs | Login</title></svelte:head>
+<svelte:head><title>NEXT photos | Login</title></svelte:head>
 <h1 class="text-center text-xl">Login</h1>
 <div class="flex justify-center items-center mt=8">
     <form on:submit={logIn} class="w-1/3">
@@ -70,7 +70,7 @@
             />
             {#if 'password' in formErrors}
             <label class="label" for="password">
-                <span class="label-text-alt text-red-500">{formErrors['password'].message}</span>
+                <span class="label-text-alt text-red-500">{formErrors['password']}</span>
             </label>
             {/if}
         </div>

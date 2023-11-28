@@ -44,9 +44,7 @@
                 throw 'Sign up succeeded but authentication failed';
             }
         }else{
-            
             const res = await resp.json();
-            
             loading = false;
             formErrors = await res.error;
         }
