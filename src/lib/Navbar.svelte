@@ -2,7 +2,7 @@
 	import {isLoggedIn} from "../utils/auth";
 	import {logOut} from "../utils/auth";
 	
-    let LoggedInValue = false;
+    let LoggedInValue;
 
 	isLoggedIn.subscribe((value)=>{
 		LoggedInValue = value;

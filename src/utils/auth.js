@@ -33,39 +33,49 @@ export function getTokenFromLocalStorage(){
 
 export async function isValidToken(){
     if(!getTokenFromLocalStorage()){
+        alert("localstorgaetoken not found")
         return false;
     }
 
     try{
+        //sends a GET request requiring auth token
         const resp = await fetch(
-            PUBLIC_BACKEND_BASE_URL+"/sign-in",
+            PUBLIC_BACKEND_BASE_URL+"/protected",
             {
-                method:"POST",
+                method:"GET",
                 mode:"cors",
                 headers:{
                     "Content-Type": "application/json",
-                    "Authorization": getTokenFromLocalStorage()
+                    "Authorization": "Bearer "+getTokenFromLocalStorage()
                 },
             }
         );
 
         const res = await resp.json();
+        //if response is successful, that means token is valid. Set isLoggedIn to true
         if(resp.status==200){
-            localStorage.setItem("auth", JSON.stringify({
-                "token": res.accessToken
-            }));
+            // localStorage.setItem("auth", JSON.stringify({
+            //     "token": res.accessToken
+            // }));
             isLoggedIn.set(true);
             return true;
+        }else{ //if response is not successful, that means token is invalid. Set the token to empty string in local storage, set isLoggedIn to false
+           localStorage.setItem("auth", JSON.stringify({
+                "token":"",
+                "userId":""
+           }));
+           isLoggedIn.set(false)
+           return false;
         }
-        return false;
-    }catch{
+    }catch(err){
+        alert(err)
         return false;
     }
 }
 
 export async function authenticateUser(email, password){
     const resp = await fetch(
-        PUBLIC_BACKEND_BASE_URL+"/sign-in",
+        PUBLIC_BACKEND_BASE_URL+"/auth",
         {
             method: "POST",
             mode: "cors",
@@ -83,7 +93,8 @@ export async function authenticateUser(email, password){
 
     if(resp.status==200){
         localStorage.setItem("auth", JSON.stringify({
-            "token":res.accessToken
+            "token":res.accessToken,
+            "userId":res.id
         }));
 
         isLoggedIn.set(true);
