@@ -33,7 +33,7 @@ export function getTokenFromLocalStorage(){
 
 export async function isValidToken(){
     if(!getTokenFromLocalStorage()){
-        alert("localstorgaetoken not found")
+
         return false;
     }
 
@@ -68,7 +68,7 @@ export async function isValidToken(){
            return false;
         }
     }catch(err){
-        alert(err)
+        
         return false;
     }
 }

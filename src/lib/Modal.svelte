@@ -19,13 +19,14 @@
 		<slot />
 		<hr />
 		<!-- svelte-ignore a11y-autofocus -->
-		<button autofocus on:click={() => dialog.close()}>close modal</button>
+		<button autofocus on:click={() => dialog.close()}>Cancel</button>
 	</div>
 </dialog>
 
 <style>
 	dialog {
-		max-width: 32em;
+		min-width: 64em;
+		min-height: 45em;
 		border-radius: 0.2em;
 		border: none;
 		padding: 0;
