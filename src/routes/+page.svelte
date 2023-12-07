@@ -7,6 +7,7 @@
 	import { getUserId } from '../utils/auth.js';
 	import {PUBLIC_BACKEND_BASE_URL} from '$env/static/public';
 	import { getTokenFromLocalStorage } from '../utils/auth.js';
+	export let data;
 
 	let showModal = false;
 	let LogggedInValue;
@@ -181,3 +182,18 @@
 		>
 	</div>
 {/if}
+
+<div class="grid grid-rows-1 lg:grid-cols-3 gap-4">
+    {#each data.images as image}
+	<div class="card border-2 bg-base-100 shadow-xl">
+		<figure><img src={image.url} alt="pic" /></figure>
+		<div class="card-body">
+		  <h2 class="card-title">{image.title}</h2>
+		  <p>{image.description}</p>
+		  <div class="card-actions justify-end">
+			<button class="btn btn-primary">Buy Now</button>
+		  </div>
+		</div>
+	  </div>
+    {/each}
+</div>
