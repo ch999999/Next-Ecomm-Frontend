@@ -47,29 +47,24 @@
 	function uploadIsValid(imgData) {
 		if (typeof imgData['file'].files[0] === 'undefined') {
 			formErrors['file'] = 'no file uploaded';
-			alert('no file uploaded')
 			return false;
 		} else if (!imgData['file'].files[0].type.includes('image')) {
 			formErrors['file'] = 'must be an image';
-			alert('must be an image')
 			return false;
 		}
 		
 		if(imgData['title'].value.length==0){
 			formErrors['title'] = "cannot be blank";
-			alert('title cannot be blank')
 			return false;
 		}
 
 		if(imgData['description'].value.length==0){
 			formErrors['description'] = {message: "cannot be blank"};
-			alert('description cannot be blank')
 			return false;
 		}
 
 		if(!priceIsValid(imgData['price'].value)){
 			formErrors['price'] = "must be a valid, non-negative number containing 0-2 decimal places";
-			alert("price must be a valid, non-negative number containing 0-2 decimal places")
 			return false;
 		}
 		return true;
