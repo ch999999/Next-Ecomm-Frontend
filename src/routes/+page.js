@@ -5,12 +5,10 @@ export async function load({fetch}){
 
     const res = await resp.json();
     if(resp.status==200){
-        const it = {images: res}
-        alert(JSON.stringify(it))
-        return it
-        // return{
-        //     images: res
-        // }
+        
+        return{
+            images: res
+        }
     }else{
         return{
             images: []
